@@ -1,0 +1,58 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.13
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.lrz.de/hpcsoftware/Peano:
+      branch: p4
+      repo: https://gitlab.lrz.de/hpcsoftware/Peano.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.lrz.de/hpcsoftware/Peano git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-heliotrope-squirt.sh
+        container: qc.acc_silly-thistle-ant
+  QC.Doc:
+    repos:
+      gitlab.lrz.de/hpcsoftware/Peano find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-platinum-dragonfly.sh
+        container: qc.doc_geeky-chocolate-ibis
+      gitlab.lrz.de/hpcsoftware/Peano git:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-cornflower-cassowary.sh
+        container: qc.doc_pokey-gold-sponge
+      gitlab.lrz.de/hpcsoftware/Peano markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.hilly-seashell-antelope.sh
+        container: qc.doc_bumpy-turquoise-terrier
+  QC.Lic:
+    repos:
+      gitlab.lrz.de/hpcsoftware/Peano licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.cheeky-corn-ragdoll.sh
+        container: qc.lic_slimy-apricot-lemming
+  QC.Sec:
+    repos:
+      gitlab.lrz.de/hpcsoftware/Peano bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-lemon-bullfrog.sh
+        container: qc.sec_pokey-carmine-snake
+  QC.Sty:
+    repos:
+      gitlab.lrz.de/hpcsoftware/Peano flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.squeaky-cream-zonkey.sh
+        container: qc.sty_lanky-maroon-saola
+  QC.Ver:
+    repos:
+      gitlab.lrz.de/hpcsoftware/Peano get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-aqua-zorse.sh
+        container: qc.ver_woolly-chocolate-flounder
+timeout: 5400
